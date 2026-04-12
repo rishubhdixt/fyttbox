@@ -35,23 +35,44 @@ body::before {
 }
 
 /* ==========================================
-   DYNAMIC ZUMBA SPLASH ANIMATION
+   SPLASH: NEON OUTLINE REVEAL ✨
    ========================================== */
-#splash { position: fixed; inset: 0; background: var(--dark); display: flex; align-items: center; justify-content: center; z-index: 9999; animation: splashOut 0.8s cubic-bezier(0.8, 0, 0.2, 1) 3.2s forwards; }
-.splash-content { position: relative; font-family: var(--font-ui); font-size: clamp(26px, 9vw, 90px); font-weight: 800; text-transform: uppercase; letter-spacing: -1px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100vh; overflow: hidden; }
-.sp-word { position: absolute; opacity: 0; transform: scale(1.5); }
-.sp-w1 { animation: smashIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.2s; color: rgba(255,255,255,0.1); -webkit-text-stroke: 1px rgba(255,255,255,0.5); }
-.sp-w2 { animation: smashIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.9s; color: var(--secondary); }
-.sp-w3 { animation: smashIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 1.6s; color: var(--primary); }
-.sp-logo { position: absolute; opacity: 0; transform: translateY(50px); font-family: var(--font-ui); font-size: clamp(40px, 14vw, 110px); background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: logoRise 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 2.4s; filter: drop-shadow(0 0 30px rgba(240,153,4,0.5)); }
-
-@keyframes smashIn { 
-  0% { opacity: 0; transform: scale(2) rotate(-5deg); filter: blur(10px); } 
-  20% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0px); } 
-  80% { opacity: 1; transform: scale(1.05) rotate(0deg); filter: blur(0px); } 
-  100% { opacity: 0; transform: scale(0.5) rotate(5deg); filter: blur(5px); } 
+#splash { 
+  position: fixed; inset: 0; background: var(--dark); display: flex; align-items: center; justify-content: center; z-index: 9999; 
+  animation: splashOut 0.8s cubic-bezier(0.8, 0, 0.2, 1) 3.5s forwards; 
 }
-@keyframes logoRise { 0% { opacity: 0; transform: translateY(50px) scale(0.8); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+.splash-logo-container {
+  position: relative;
+  width: clamp(200px, 50vw, 450px);
+  display: flex; justify-content: center; align-items: center;
+}
+.splash-logo-img { 
+  width: 100%; height: auto; object-fit: contain; 
+  opacity: 0; 
+  filter: brightness(0) drop-shadow(0 0 5px rgba(240,153,4,0));
+  animation: neonReveal 2.5s ease-in-out forwards 0.2s; 
+}
+.splash-glow {
+  position: absolute;
+  width: 150%; height: 20px;
+  background: linear-gradient(90deg, transparent, rgba(240,153,4,0.8), rgba(141,125,179,0.8), transparent);
+  filter: blur(15px);
+  transform: rotate(-45deg) translateY(-200px);
+  opacity: 0;
+  animation: sweepLight 2s ease-in-out forwards 0.5s;
+}
+
+@keyframes neonReveal { 
+  0% { opacity: 0; filter: brightness(0) drop-shadow(0 0 0px rgba(240,153,4,0)); transform: scale(0.95); } 
+  30% { opacity: 1; filter: brightness(0.2) drop-shadow(0 0 10px rgba(141,125,179,0.5)); } 
+  70% { opacity: 1; filter: brightness(1.5) drop-shadow(0 0 30px rgba(240,153,4,0.8)); transform: scale(1.02); } 
+  100% { opacity: 1; filter: brightness(1) drop-shadow(0 0 15px rgba(240,153,4,0.3)); transform: scale(1); } 
+}
+@keyframes sweepLight {
+  0% { opacity: 0; transform: rotate(-45deg) translateY(-200px) translateX(-200px); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(-45deg) translateY(200px) translateX(200px); }
+}
 @keyframes splashOut { to { opacity: 0; visibility: hidden; transform: translateY(-100%); } }
 
 /* ==========================================
@@ -68,7 +89,7 @@ body::before {
 .rvr { opacity: 0; transform: translateX(24px); transition: opacity .6s ease, transform .6s ease; }
 .rv.on, .rvr.on { opacity: 1; transform: translate(0); }
 
-.btn-fire { display: inline-block; font-family: var(--font-ui); font-size: 13px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: #fff; background: var(--grad); border: none; padding: 16px 32px; border-radius: 4px; position: relative; overflow: hidden; transition: transform .2s; text-align: center; }
+.btn-fire { display: inline-block; font-family: var(--font-ui); font-size: 13px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: #fff; background: var(--grad); border: none; padding: 16px 32px; border-radius: 4px; position: relative; overflow: hidden; transition: transform .2s; text-align: center; cursor: pointer; }
 .btn-fire::after { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.15) 50%, transparent 70%); transform: translateX(-100%); transition: transform .5s; }
 .btn-fire:hover::after { transform: translateX(100%); }
 .btn-fire:hover { transform: translateY(-2px); }
@@ -83,9 +104,7 @@ body::before {
 nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; height: 145px; padding: 0 5%; display: flex; align-items: center; justify-content: space-between; transition: background .4s, border-color .4s, backdrop-filter .4s; border-bottom: 1px solid transparent; }
 nav.scrolled { background: rgba(6,6,8,.95); backdrop-filter: blur(15px); border-color: var(--line); }
 .logo { display: flex; align-items: center; justify-content: flex-start; }
-
-/* LOGO SIZE - MOBILE */
-.logo img { height: 110px; width: auto; object-fit: contain; filter: brightness(1.2); transition: transform .3s; }
+.logo img { height: 125px; width: auto; object-fit: contain; filter: brightness(1.2); transition: transform .3s; }
 .logo:hover img { transform: scale(1.05); }
 
 .nav-links, .nav-cta { display: none; }
@@ -100,12 +119,21 @@ nav.scrolled { background: rgba(6,6,8,.95); backdrop-filter: blur(15px); border-
 .mob-close { position: absolute; top: 20px; right: 5%; background: none; border: none; color: #fff; font-size: 28px; padding: 10px; }
 
 /* ==========================================
+   FLOATING SOCIAL ICONS
+   ========================================== */
+.float-soc { position: fixed; bottom: 24px; right: 20px; display: flex; flex-direction: column; gap: 12px; z-index: 998; }
+.float-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4); transition: transform 0.3s; }
+.float-btn:hover { transform: scale(1.1); }
+.float-wa { background: #25D366; }
+.float-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+
+/* ==========================================
    HERO SECTION
    ========================================== */
 .hero { 
   min-height: 100vh; display: grid; grid-template-columns: 1fr; position: relative; overflow: hidden; 
   background-image: linear-gradient(135deg, rgba(6,6,8,0.92) 0%, rgba(6,6,8,0.75) 100%), url('https://images.unsplash.com/photo-1524594152303-9fd13543fe6e?auto=format&fit=crop&w=1920&q=80');
-  background-size: cover; background-position: center top; background-attachment: fixed; padding-top: 145px; /* Matches Nav height */
+  background-size: cover; background-position: center top; background-attachment: fixed; padding-top: 145px; 
 }
 .blob { position: absolute; border-radius: 50%; filter: blur(60px); pointer-events: none; opacity: 0.4; mix-blend-mode: screen; }
 .b1 { width: 300px; height: 300px; background: rgba(240,153,4,.3); top: -50px; right: -50px; }
@@ -133,7 +161,6 @@ nav.scrolled { background: rgba(6,6,8,.95); backdrop-filter: blur(15px); border-
 .stat-card { background: rgba(17,17,24,0.7); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px 16px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 .snum { font-family: var(--font-d); font-size: 32px; font-weight: 700; font-style: italic; line-height: 1; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
 .slabel { font-family: var(--font-ui); font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
-.hero-bg-word, .ftag { display: none; } 
 
 /* ==========================================
    HORIZONTAL SCROLL MIXIN (MOBILE)
@@ -151,10 +178,25 @@ nav.scrolled { background: rgba(6,6,8,.95); backdrop-filter: blur(15px); border-
   scrollbar-width: none; 
 }
 .scroll-track-mob::-webkit-scrollbar { display: none; } 
-.scroll-card-mob {
-  flex: 0 0 82vw; 
-  scroll-snap-align: start;
-}
+.scroll-card-mob { flex: 0 0 82vw; scroll-snap-align: start; }
+
+/* ==========================================
+   FITNESS ICONS INSPIRATION SECTION
+   ========================================== */
+.inspo-sec { background: var(--dark); border-bottom: 1px solid var(--line); position: relative; }
+.inspo-hdr { margin-bottom: 24px; text-align: center; }
+.inspo-card { background: rgba(17,17,24,0.6); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: transform .3s, border-color .3s; height: 100%; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+.inspo-card:hover { transform: translateY(-6px); border-color: rgba(240,153,4,0.3); }
+.inspo-img { width: 100%; aspect-ratio: 1 / 1.1; overflow: hidden; position: relative; }
+.inspo-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--card) 0%, transparent 50%); z-index: 1; pointer-events: none;}
+.inspo-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9) contrast(1.1); transition: filter 0.5s ease, transform 0.5s ease; }
+.inspo-card:hover .inspo-img img { filter: brightness(1.1) contrast(1.1); transform: scale(1.05); }
+
+.inspo-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; position: relative; z-index: 2; margin-top: -30px; }
+.inspo-quote { font-family: var(--font-d); font-size: clamp(20px, 5vw, 24px); font-style: italic; line-height: 1.5; color: rgba(255,255,255,0.9); margin-bottom: 16px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+.inspo-quote::before { content: '"'; font-size: 40px; color: var(--primary); opacity: 0.5; position: absolute; top: -10px; left: 10px; font-family: var(--font-b); }
+.inspo-name { font-family: var(--font-ui); font-size: 11px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1.5px; text-align: right; }
+.inspo-name span { color: var(--secondary); font-size: 14px; margin-right: 4px; }
 
 /* ==========================================
    PROGRAMS
@@ -169,23 +211,20 @@ nav.scrolled { background: rgba(6,6,8,.95); backdrop-filter: blur(15px); border-
 .pc-pill { display: inline-block; font-family: var(--font-ui); font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 3px; background: rgba(240,153,4,.1); color: var(--secondary); }
 
 /* ==========================================
-   BMI (CREATIVE MOBILE STRUCTURE)
+   BMI
    ========================================== */
 .bmi-sec { background: var(--dark); position: relative; }
 .bmi-sec::before { content: ''; position: absolute; top: 10%; right: -50px; width: 250px; height: 250px; background: rgba(240,153,4,0.06); filter: blur(60px); border-radius: 50%; pointer-events: none; }
 .bmi-inner { display: grid; grid-template-columns: 1fr; gap: 32px; }
-
 .bmi-fields { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
 .bmi-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; } 
 .fg { display: flex; flex-direction: column; gap: 6px; }
 .fl { font-family: var(--font-ui); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
 .fi { background: rgba(17,17,24,0.8); border: 1px solid rgba(255,255,255,.08); border-radius: 8px; padding: 14px 16px; color: #fff; font-family: var(--font-b); font-size: 14px; outline: none; transition: border-color 0.3s; }
 .fi:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(240,153,4,0.2); }
-.bmi-btn { width: 100%; background: var(--grad); color: #fff; border: none; padding: 16px; border-radius: 8px; font-family: var(--font-ui); font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; box-shadow: 0 4px 15px rgba(240,153,4,0.2); }
-
+.bmi-btn { width: 100%; background: var(--grad); color: #fff; border: none; padding: 16px; border-radius: 8px; font-family: var(--font-ui); font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; box-shadow: 0 4px 15px rgba(240,153,4,0.2); cursor: pointer; }
 .bmi-panel { background: rgba(10,10,15,0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 32px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; min-height: 240px; justify-content: center; box-shadow: inset 0 0 30px rgba(0,0,0,0.8), 0 10px 30px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
 .bmi-panel::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, rgba(240,153,4,0.5), transparent); }
-
 .pulse-icon { font-size: 44px; opacity: 0.6; animation: subtlePulse 2s infinite ease-in-out; filter: drop-shadow(0 0 10px rgba(240,153,4,0.3)); }
 @keyframes subtlePulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.8; } }
 
@@ -204,12 +243,11 @@ nav.scrolled { background: rgba(6,6,8,.95); backdrop-filter: blur(15px); border-
 .tc-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
 
 /* ==========================================
-   COMMUNITY (CREATIVE HORIZONTAL MOBILE)
+   COMMUNITY 
    ========================================== */
 .cm-sec { background: var(--dark); position: relative; overflow: hidden; }
 .cm-sec::before { content: ''; position: absolute; top: 50%; left: -100px; width: 300px; height: 300px; background: rgba(240,153,4,0.05); filter: blur(80px); border-radius: 50%; pointer-events: none; }
 .cm-grid { margin-top: 32px; position: relative; z-index: 2; }
-
 .ch-list { display: flex; gap: 16px; } 
 
 .ch-card { background: rgba(17,17,24,0.6); backdrop-filter: blur(10px); border: 1px solid var(--line); border-bottom: 3px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px 20px; display: flex; flex-direction: column; text-align: center; align-items: center; gap: 16px; transition: all 0.3s ease; position: relative; overflow: hidden; height: 100%; justify-content: center; }
@@ -234,18 +272,63 @@ nav.scrolled { background: rgba(6,6,8,.95); backdrop-filter: blur(15px); border-
 .insta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(240,153,4,0.3); }
 
 /* ==========================================
-   REVIEWS (NATIVE SCROLL-SNAP)
+   REVIEWS (HIGH-IMPACT Transformation Gallery)
    ========================================== */
 .rv-sec { background: var(--dark2); }
-.rv-hdr { margin-bottom: 16px; display: flex; flex-direction: column; gap: 16px; }
-.slide { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; transition: transform .3s; height: 100%; }
-.rv-quote { font-family: var(--font-d); font-size: 40px; font-weight: 700; font-style: italic; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin-bottom: 4px; }
+.rv-hdr { margin-bottom: 40px; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center; }
+
+/* SEPARATED VIDEO SHOWCASE */
+.video-showcase-container {
+  display: flex; flex-direction: column; align-items: center;
+  margin-bottom: 80px; 
+}
+.video-wrapper { 
+  width: 100%; max-width: 400px; 
+  border-radius: 16px; overflow: hidden; background: #000; 
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+  border: 1px solid rgba(255,255,255,0.1); 
+  aspect-ratio: 9 / 16; 
+}
+.video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+.rv-video-caption { margin-top: 20px; text-align: center; }
+.rv-video-caption h4 { font-family: var(--font-d); font-size: 26px; font-style: italic; color: var(--primary); text-shadow: 0 2px 10px rgba(240,153,4,0.3); }
+.rv-video-caption p { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+/* NEW HIGH-IMPACT BEFORE/AFTER CARDS */
+.slide { 
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; 
+  padding: 0; transition: transform .3s, border-color 0.3s; 
+  height: 100%; display: flex; flex-direction: column; overflow: hidden; 
+}
+.slide:hover { border-color: rgba(240,153,4,0.3); transform: translateY(-4px); }
+
+/* Large Image Transformation Box */
+.tm-image-box {
+  width: 100%; aspect-ratio: 1 / 1.1; background: #000; overflow: hidden; position: relative; border-bottom: 1px solid var(--line);
+}
+.tm-image-box img { width: 100%; height: 100%; object-fit: cover; }
+.tm-image-box::after {
+  content: 'BEFORE | AFTER'; position: absolute; bottom: 8px; left: 8px;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); color: #fff;
+  font-family: var(--font-ui); font-size: 8px; font-weight: 700; letter-spacing: 1px;
+  padding: 4px 8px; border-radius: 2px; z-index: 2;
+}
+
+/* Content Area below Image */
+.tm-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
 .rv-stars { margin-bottom: 12px; color: var(--primary); font-size: 12px; }
-.sl-ctrls { display: flex; gap: 12px; align-items: center; }
-.sl-btn { width: 36px; height: 36px; background: var(--card); border: 1px solid var(--line); border-radius: 50%; color: var(--muted); display: flex; align-items: center; justify-content: center; }
+.rv-text { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.6; font-style: italic; margin-bottom: auto; padding-bottom: 16px; }
+
+.rv-author { display: flex; flex-direction: column; border-top: 1px solid var(--line); padding-top: 16px; }
+.rv-name { font-family: var(--font-ui); font-size: 14px; font-weight: 700; margin-bottom: 2px; color: #fff; }
+.rv-detail { font-size: 11px; color: var(--primary); }
+
+.sl-ctrls { display: flex; gap: 12px; align-items: center; margin-top: 32px; justify-content: center; }
+.sl-btn { width: 36px; height: 36px; background: var(--card); border: 1px solid var(--line); border-radius: 50%; color: var(--muted); display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; transition: all 0.2s; }
+.sl-btn:hover { border-color: var(--primary); color: var(--primary); }
 .sl-dots { display: flex; gap: 6px; }
-.sl-dot { width: 6px; height: 6px; border-radius: 3px; background: var(--line); transition: width .3s; cursor: pointer; }
-.sl-dot.on { background: var(--primary); width: 20px; }
+.sl-dot { width: 8px; height: 8px; border-radius: 4px; background: var(--line); transition: width .3s; cursor: pointer; }
+.sl-dot.on { background: var(--primary); width: 24px; }
 
 /* ==========================================
    FINAL CTA
@@ -279,29 +362,28 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
    ========================================== */
 @media (min-width: 768px) {
   .sec { padding: 90px 6%; } 
-  nav { padding: 0 6%; height: 155px; } /* INCREASED NAV HEIGHT FOR TABLET LOGO */
-  .logo img { height: 120px; } /* BIGGER LOGO FOR TABLET */
-  .hero { background-attachment: fixed; padding-top: 155px; } /* Adjusted to match nav */
+  nav { padding: 0 6%; height: 155px; } 
+  .logo img { height: 135px; } 
+  .hero { background-attachment: fixed; padding-top: 155px; }
   
-  /* Reset mobile native scroll to Grid for desktop viewing */
-  .scroll-track-mob {
-    display: grid; 
-    margin: 0; padding: 0; 
-    overflow: visible; 
-  }
+  .scroll-track-mob { display: grid; margin: 0; padding: 0; overflow: visible; }
   .scroll-card-mob { flex: none; width: auto; }
+  
+  .inspo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+  .inspo-hdr { text-align: left; }
   
   .prog-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .tr-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
   
-  /* Keep Reviews as a horizontal slider but adjust widths */
+  .rv-hdr { flex-direction: row; justify-content: space-between; align-items: flex-end; text-align: left; }
+  .sl-ctrls { margin-top: 0; }
+  
   #slTrack { display: flex; overflow-x: auto; margin: 0 -6%; padding: 10px 6% 30px; }
-  .slide { flex: 0 0 calc(50% - 8px); }
+  .slide { flex: 0 0 calc(40% - 10px); } 
   
   .bmi-inner { grid-template-columns: 1fr 1fr; align-items: center; } 
   .bmi-panel { min-height: 280px; }
   
-  /* Reset Community List to Vertical Grid for Desktop */
   .cm-grid { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 40px; margin-top: 40px; }
   .ch-list.scroll-track-mob { display: flex; flex-direction: column; gap: 16px; margin: 0; padding: 0; overflow: visible; }
   .ch-card { flex-direction: row; text-align: left; padding: 24px; border-bottom: 1px solid var(--line); border-left: 3px solid rgba(255,255,255,0.1); } 
@@ -311,7 +393,6 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
   .insta-card { margin-top: 0; }
   
   .ft-grid { grid-template-columns: repeat(2, 1fr); text-align: left; }
-  .rv-hdr { flex-direction: row; justify-content: space-between; align-items: flex-end; }
   .cta-btns { flex-direction: row; max-width: none; justify-content: center; }
   .ft-brand-logo, .ft-soc { justify-content: flex-start; }
   .ft-bottom { flex-direction: row; justify-content: space-between; }
@@ -319,8 +400,8 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
 
 @media (min-width: 1024px) {
   .sec { padding: 110px 8%; } 
-  nav { height: 175px; padding: 0 8%; } /* MAX NAV HEIGHT FOR DESKTOP LOGO */
-  .logo img { height: 138px; } /* BIGGEST LOGO FOR DESKTOP AS REQUESTED */
+  nav { height: 175px; padding: 0 8%; } 
+  .logo img { height: 155px; } 
   .ham { display: none; }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a { font-family: var(--font-ui); font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; transition: color .2s; position: relative; }
@@ -329,8 +410,8 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
   .nav-cta { display: inline-block; font-family: var(--font-ui); font-size: 12px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: #fff; background: var(--grad); border: none; padding: 12px 26px; border-radius: 4px; transition: transform .2s; }
   .nav-cta:hover { transform: translateY(-1px); }
   
-  .hero { grid-template-columns: 55% 45%; padding-top: 175px; align-items: center; } /* Adjusted to match nav */
-  .hero-l { text-align: left; align-items: flex-start; padding: 80px 5% 80px 8%; } /* Adjusted padding */
+  .hero { grid-template-columns: 55% 45%; padding-top: 175px; align-items: center; } 
+  .hero-l { text-align: left; align-items: flex-start; padding: 80px 5% 80px 8%; } 
   .h1 .offset { margin-left: 56px; }
   .hero-btns { flex-direction: row; max-width: none; }
   .hero-r { padding: 40px 8% 60px 0; align-items: flex-end; justify-content: center; height: 100%; position: relative; }
@@ -348,13 +429,13 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
   .tc:hover { transform: translateY(-8px); border-color: rgba(240,153,4,.3); }
   
   .cm-grid { gap: 60px; }
-  .insta-card { position: sticky; top: 180px; } /* Adjusted stickiness due to tall nav */
+  .insta-card { position: sticky; top: 180px; } 
   .ch-card { transition: transform .2s; } .ch-card:hover { transform: translateX(8px); border-color: rgba(240,153,4,.3); }
 
   .ft-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
   
   #slTrack { margin: 0 -8%; padding: 10px 8% 30px; }
-  .slide { flex: 0 0 calc(33.333% - 11px); }
+  .slide { flex: 0 0 calc(30% - 10px); } 
   .slide:hover { transform: translateY(-4px); border-color: rgba(240,153,4,.3); }
   .ft-links a:hover { color: #fff; }
 }
@@ -366,12 +447,19 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
 </head>
 <body>
 
+<div class="float-soc">
+  <a href="https://wa.me/917838355692?text=Hi%2C%20I%20am%20interested%20in%20joining%20FytBox!" target="_blank" class="float-btn float-wa" aria-label="WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+  </a>
+  <a href="https://instagram.com/fytboxonline" target="_blank" class="float-btn float-ig" aria-label="Instagram">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+  </a>
+</div>
+
 <div id="splash">
-  <div class="splash-content">
-    <div class="sp-word sp-w1">DANCE.</div>
-    <div class="sp-word sp-w2">SWEAT.</div>
-    <div class="sp-word sp-w3">TRANSFORM.</div>
-    <div class="sp-logo">FytBox</div>
+  <div class="splash-logo-container">
+    <div class="splash-glow"></div>
+    <img src="logo.png" alt="FytBox Logo" class="splash-logo-img">
   </div>
 </div>
 
@@ -383,7 +471,7 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
     <li><a href="#community" onclick="toggleMob()">Community</a></li>
     <li><a href="#bmi" onclick="toggleMob()">BMI</a></li>
     <li><a href="#reviews" onclick="toggleMob()">Reviews</a></li>
-    <li><a href="#join" onclick="toggleMob()">Join Free</a></li>
+    <li><a href="https://wa.me/917838355692?text=Hi%2C%20I%20am%20interested%20in%20joining%20FytBox!" target="_blank" onclick="toggleMob()">Join Now</a></li>
   </ul>
 </div>
 
@@ -398,7 +486,7 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
     <li><a href="#bmi">BMI Check</a></li>
     <li><a href="#reviews">Reviews</a></li>
   </ul>
-  <a class="nav-cta" href="#join">Free Trial</a>
+  <a class="nav-cta" href="https://wa.me/917838355692?text=Hi%2C%20I%20am%20interested%20in%20joining%20FytBox!" target="_blank">Join Now</a>
   <button class="ham" aria-label="Menu" onclick="toggleMob()"><span></span><span></span><span></span></button>
 </nav>
 
@@ -420,8 +508,8 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
     <p class="hero-desc rv">Live online Zumba classes built for women — energetic, expert-led, and designed around your life. Dance your way to the body and confidence you deserve.</p>
     
     <div class="hero-btns rv">
-      <a class="btn-fire" href="#join">Join Now</a>
-      <a class="btn-ghost" href="#demo"><span class="play-c">▶</span>Watch Demo</a>
+      <a class="btn-fire" href="https://wa.me/917838355692?text=Hi%2C%20I%20am%20interested%20in%20a%20Free%20Consultation." target="_blank">Free Consultation</a>
+      <a class="btn-ghost" href="#reviews"><span class="play-c">▶</span>Watch Reviews</a>
     </div>
   </div>
   
@@ -435,6 +523,45 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
       <div class="stat-card"><div class="snum">10+</div><div class="slabel">Trainers</div></div>
       <div class="stat-card"><div class="snum">4.9★</div><div class="slabel">Rating</div></div>
       <div class="stat-card"><div class="snum">100%</div><div class="slabel">Results</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec inspo-sec" id="inspiration">
+  <div class="inspo-hdr rv">
+    <div class="stag">Iconic Motivation</div>
+    <h2 class="sh2">Inspired By India's<br><em>Fitness Icons</em></h2>
+  </div>
+  
+  <div class="inspo-grid scroll-track-mob">
+    <div class="inspo-card scroll-card-mob rv">
+      <div class="inspo-img">
+        <img src="deepika.webp" alt="Deepika Padukone">
+      </div>
+      <div class="inspo-content">
+        <p class="inspo-quote">Make fitness a part of your daily routine, not a temporary goal.</p>
+        <h4 class="inspo-name"><span>—</span> Deepika Padukone</h4>
+      </div>
+    </div>
+
+    <div class="inspo-card scroll-card-mob rv" style="transition-delay: 0.1s;">
+      <div class="inspo-img">
+        <img src="malaika.webp" alt="Malaika Arora">
+      </div>
+      <div class="inspo-content">
+        <p class="inspo-quote">Take care of your body. It’s the only place you have to live.</p>
+        <h4 class="inspo-name"><span>—</span> Malaika Arora</h4>
+      </div>
+    </div>
+
+    <div class="inspo-card scroll-card-mob rv" style="transition-delay: 0.2s;">
+      <div class="inspo-img">
+        <img src="shilpa.webp" alt="Shilpa Shetty">
+      </div>
+      <div class="inspo-content">
+        <p class="inspo-quote">Fitness is not about being better than someone else. It’s about being better than you used to be.</p>
+        <h4 class="inspo-name"><span>—</span> Shilpa Shetty</h4>
+      </div>
     </div>
   </div>
 </section>
@@ -528,31 +655,98 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
       <div style="font-size:64px; margin-bottom: 16px; filter: drop-shadow(0 0 15px rgba(240,153,4,0.4));">👑</div>
       <h3>Winners Featured on <em>Instagram!</em></h3>
       <p>The best challenge entries each week get spotlighted on our official page — right in front of 500+ motivated women. It's your time to shine!</p>
-      <a class="insta-btn" href="#">📸 Follow @FytBox</a>
+      <a class="insta-btn" href="https://instagram.com/fytboxonline" target="_blank">📸 Follow @fytboxonline</a>
     </div>
   </div>
 </section>
 
 <section class="sec rv-sec" id="reviews">
+  
   <div class="rv-hdr rv">
     <div>
       <div class="stag">Real Stories</div>
       <h2 class="sh2" style="margin-bottom:0">What Women<br><em>Are Saying</em></h2>
     </div>
+  </div>
+  
+  <div class="video-showcase-container rv">
+    <div class="video-wrapper">
+      <video src="video.MP4" controls playsinline preload="metadata" poster="test1.webp"></video>
+    </div>
+    <div class="rv-video-caption">
+      <h4>"Real Results. Real Sisterhood."</h4>
+      <p>Watch Our Community's Journey</p>
+    </div>
+  </div>
+
+  <div class="gallery-slider rv" style="transition-delay: 0.1s;">
+    <div class="scroll-track-mob" id="slTrack">
+      
+      <div class="slide scroll-card-mob">
+        <div class="tm-image-box">
+          <img src="test1.webp" alt="Transformation Result 1">
+        </div>
+        <div class="tm-content">
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">"Lost 6kg in 6 weeks and I was genuinely having fun the entire time. The trainers make you feel like you're at a party."</p>
+          <div class="rv-author">
+            <div class="rv-name">Sunita Rawat</div>
+            <div class="rv-detail">Delhi · Zumba Program</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="slide scroll-card-mob">
+        <div class="tm-image-box">
+          <img src="test2.webp" alt="Transformation Result 2">
+        </div>
+        <div class="tm-content">
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">"As a busy working mom, FytBox is the only fitness platform I've actually stuck with. Sneha ma'am is incredible and motivating."</p>
+          <div class="rv-author">
+            <div class="rv-name">Meera Kulkarni</div>
+            <div class="rv-detail">Mumbai · Post-Pregnancy</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="slide scroll-card-mob">
+        <div class="tm-image-box">
+          <img src="test3.webp" alt="Transformation Result 3">
+        </div>
+        <div class="tm-content">
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">"PCOS made weight loss feel impossible. FytBox specialized sessions changed everything. Highly recommend."</p>
+          <div class="rv-author">
+            <div class="rv-name">Anjali Patel</div>
+            <div class="rv-detail">Bangalore · PCOS Fitness</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="slide scroll-card-mob">
+        <div class="tm-image-box">
+          <img src="test4.webp" alt="Transformation Result 4">
+        </div>
+        <div class="tm-content">
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">"Post-delivery I struggled to feel like myself. FytBox helped me feel stronger, happier, and more confident."</p>
+          <div class="rv-author">
+            <div class="rv-name">Ritika Sharma</div>
+            <div class="rv-detail">Hyderabad · HIIT Dance</div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
     <div class="sl-ctrls">
       <button class="sl-btn" aria-label="Previous" onclick="slide(-1)">&#8592;</button>
       <div class="sl-dots" id="slDots"></div>
       <button class="sl-btn" aria-label="Next" onclick="slide(1)">&#8594;</button>
     </div>
   </div>
-  <div class="slider-wrap rv">
-    <div class="scroll-track-mob" id="slTrack">
-      <div class="slide scroll-card-mob"><div class="rv-quote">"</div><div class="rv-stars">★★★★★</div><p class="rv-text">Lost 6kg in 6 weeks and I was genuinely having fun the entire time. The trainers make you feel like you're at a party, not exercising.</p><div class="rv-author"><div class="rv-av">S</div><div><div class="rv-name">Sunita Rawat</div><div class="rv-detail">Delhi · Lost 6kg in 6 weeks</div></div></div></div>
-      <div class="slide scroll-card-mob"><div class="rv-quote">"</div><div class="rv-stars">★★★★★</div><p class="rv-text">As a busy working mom, FytBox is the only fitness platform I've actually stuck with. Priya ma'am is simply incredible and so motivating.</p><div class="rv-author"><div class="rv-av">M</div><div><div class="rv-name">Meera Kulkarni</div><div class="rv-detail">Mumbai · 3 months member</div></div></div></div>
-      <div class="slide scroll-card-mob"><div class="rv-quote">"</div><div class="rv-stars">★★★★★</div><p class="rv-text">PCOS made weight loss feel impossible for years. FytBox's specialised sessions changed everything — lost 4kg.</p><div class="rv-author"><div class="rv-av">A</div><div><div class="rv-name">Anjali Patel</div><div class="rv-detail">Bangalore · PCOS Program</div></div></div></div>
-      <div class="slide scroll-card-mob"><div class="rv-quote">"</div><div class="rv-stars">★★★★★</div><p class="rv-text">Post-delivery I struggled to feel like myself. In just 8 weeks with FytBox I feel stronger, happier, and more confident.</p><div class="rv-author"><div class="rv-av">R</div><div><div class="rv-name">Ritika Sharma</div><div class="rv-detail">Hyderabad · Post-Pregnancy</div></div></div></div>
-    </div>
-  </div>
+  
 </section>
 
 <section class="cta-sec" id="join">
@@ -560,8 +754,8 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
   <h2 class="cta-h2 rv">Ready to <em>Dance</em><br>Your Way Fit?</h2>
   <p class="cta-sub rv">Your first session is completely free. No credit card. No commitment. Just you, the music, and your transformation.</p>
   <div class="cta-btns rv">
-    <a class="btn-fire" href="#">Start Free Trial</a>
-    <a class="btn-ghost" href="#demo"><span class="play-c">▶</span>Watch Demo</a>
+    <a class="btn-fire" href="https://wa.me/917838355692?text=Hi%2C%20I%20am%20interested%20in%20a%20Free%20Consultation." target="_blank">Free Consultation</a>
+    <a class="btn-ghost" href="#reviews"><span class="play-c">▶</span>Watch Reviews</a>
   </div>
   <div class="cta-note rv"><span>✓</span> Free trial &nbsp;&nbsp; <span>✓</span> No credit card &nbsp;&nbsp; <span>✓</span> Cancel anytime</div>
 </section>
@@ -571,7 +765,10 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
     <div>
       <div class="ft-brand-logo"><span style="color:#fff">Fyt</span><span class="l2">Box</span></div>
       <p class="ft-desc">India's most energetic online Zumba platform for women. Dance, sweat, and transform from wherever you are in the world.</p>
-      <div class="ft-soc"><a class="ft-s" href="#">📸</a><a class="ft-s" href="#">▶</a><a class="ft-s" href="#">💼</a></div>
+      <div class="ft-soc">
+        <a class="ft-s" href="https://instagram.com/fytboxonline" target="_blank">📸</a>
+        <a class="ft-s" href="https://wa.me/917838355692" target="_blank">💬</a>
+      </div>
     </div>
     <div>
       <div class="ft-col-t">Classes</div>
@@ -579,16 +776,15 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
     </div>
     <div>
       <div class="ft-col-t">Company</div>
-      <ul class="ft-links"><li><a href="#">About Us</a></li><li><a href="#">Trainers</a></li><li><a href="#">Community</a></li><li><a href="#">Blog</a></li></ul>
+      <ul class="ft-links"><li><a href="https://instagram.com/fytboxonline" target="_blank">@fytboxonline</a></li><li><a href="#trainers">Trainers</a></li><li><a href="#community">Community</a></li><li><a href="#blog">Blog</a></li></ul>
     </div>
     <div>
       <div class="ft-col-t">Support</div>
-      <ul class="ft-links"><li><a href="#">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms & Conditions</a></li></ul>
+      <ul class="ft-links"><li><a href="https://wa.me/917838355692" target="_blank">+91 78383 55692</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms & Conditions</a></li></ul>
     </div>
   </div>
   <div class="ft-bottom">
     <div class="ft-copy">© 2026 <em>FytBox™</em>. All rights reserved.</div>
-    <div class="ft-copy">📧 hello@fytbox.in | 📞 +91 98765 00000</div>
   </div>
 </footer>
 
@@ -614,7 +810,7 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('.rv, .rvr').forEach(el => obs.observe(el));
 
-/* BMI CALCULATOR */
+/* BMI CALCULATOR WITH WHATSAPP LINK */
 function calcBMI() {
   const w = parseFloat(document.getElementById('bWeight').value);
   const h = parseFloat(document.getElementById('bHeight').value);
@@ -632,7 +828,7 @@ function calcBMI() {
     <div class="bmi-cat" style="color:${col}">${cat}</div>
     <div class="bmi-msg">${msg}</div>
     <div class="bmi-bar-wrap" style="width:100%;height:6px;border-radius:3px;background:rgba(255,255,255,0.06);overflow:hidden;margin-top:8px;"><div class="bmi-bar" id="bBar" style="width:0%;height:100%;border-radius:3px;background:${col};transition:width 1s ease;"></div></div>
-    <a href="#join" class="btn-fire" style="padding:12px 24px; margin-top:10px; font-size:11px;">Join Recommended Class</a>`;
+    <a href="https://wa.me/917838355692?text=Hi!%20My%20BMI%20is%20${bs}.%20What%20is%20best%20for%20me%3F" target="_blank" class="btn-fire" style="padding:12px 24px; margin-top:10px; font-size:11px; background: #25D366; color: #fff; border: 1px solid #25D366;">Ask on WhatsApp</a>`;
   setTimeout(() => document.getElementById('bBar').style.width = pct + '%', 100);
 }
 
