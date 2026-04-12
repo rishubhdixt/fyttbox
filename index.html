@@ -94,7 +94,7 @@ body::before {
 .btn-fire:hover::after { transform: translateX(100%); }
 .btn-fire:hover { transform: translateY(-2px); }
 
-.btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: var(--font-ui); font-size: 13px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; color: rgba(255,255,255,.9); background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,.3); padding: 15px 28px; border-radius: 4px; transition: all .2s; }
+.btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: var(--font-ui); font-size: 13px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; color: rgba(255,255,255,.9); background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,.3); padding: 15px 28px; border-radius: 4px; transition: all .2s; cursor: pointer; }
 .btn-ghost:hover { border-color: rgba(240,153,4,.6); color: #fff; background: rgba(240,153,4,.1); }
 .play-c { width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(255,255,255,.4); display: flex; align-items: center; justify-content: center; font-size: 9px; }
 
@@ -222,28 +222,69 @@ nav.scrolled { background: rgba(6,6,8,.95); backdrop-filter: blur(15px); border-
 .fl { font-family: var(--font-ui); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
 .fi { background: rgba(17,17,24,0.8); border: 1px solid rgba(255,255,255,.08); border-radius: 8px; padding: 14px 16px; color: #fff; font-family: var(--font-b); font-size: 14px; outline: none; transition: border-color 0.3s; }
 .fi:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(240,153,4,0.2); }
-.bmi-btn { width: 100%; background: var(--grad); color: #fff; border: none; padding: 16px; border-radius: 8px; font-family: var(--font-ui); font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; box-shadow: 0 4px 15px rgba(240,153,4,0.2); cursor: pointer; }
+.bmi-btn { width: 100%; background: var(--grad); color: #fff; border: none; padding: 16px; border-radius: 8px; font-family: var(--font-ui); font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; box-shadow: 0 4px 15px rgba(240,153,4,0.2); cursor: pointer; transition: transform 0.2s; }
+.bmi-btn:hover { transform: translateY(-2px); }
+
 .bmi-panel { background: rgba(10,10,15,0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 32px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; min-height: 240px; justify-content: center; box-shadow: inset 0 0 30px rgba(0,0,0,0.8), 0 10px 30px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
 .bmi-panel::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, rgba(240,153,4,0.5), transparent); }
 .pulse-icon { font-size: 44px; opacity: 0.6; animation: subtlePulse 2s infinite ease-in-out; filter: drop-shadow(0 0 10px rgba(240,153,4,0.3)); }
 @keyframes subtlePulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.8; } }
 
 /* ==========================================
-   TRAINERS
+   REVIEWS & ISOLATED VIDEO SECTION (MOVED UP)
    ========================================== */
-.tr-sec { background: var(--dark2); }
-.tr-hdr { margin-bottom: 24px; }
-.tc { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; transition: transform .3s; height: 100%; }
-.tc-photo { aspect-ratio: 4/3; background: linear-gradient(135deg, #160510 0%, #220A18 50%, #160510 100%); display: flex; align-items: center; justify-content: center; position: relative; }
-.tc-init { font-family: var(--font-d); font-size: 48px; font-weight: 700; font-style: italic; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: .4; }
-.tc-spec { position: absolute; bottom: 10px; left: 10px; background: rgba(6,6,8,.8); backdrop-filter: blur(4px); border: 1px solid var(--line); border-radius: 3px; padding: 4px 8px; font-family: var(--font-ui); font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--secondary); }
-.tc-info { padding: 16px; }
-.tc-name { font-family: var(--font-ui); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-.tc-meta { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
-.tc-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+.rv-sec { background: var(--dark2); }
+.rv-hdr { margin-bottom: 40px; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center; }
+
+/* PURE IMAGE BEFORE/AFTER CARDS (GALLERY FIRST) */
+.gallery-slider { margin-bottom: 60px; }
+.slide { 
+  background: transparent; border: none; padding: 0; 
+  transition: transform .3s; 
+  height: 100%; display: flex; flex-direction: column; overflow: visible; 
+}
+.slide:hover { transform: translateY(-4px); }
+
+/* Large Image Transformation Box */
+.tm-image-box {
+  width: 100%; aspect-ratio: 4 / 5; background: #000; overflow: hidden; position: relative; border-radius: 16px; box-shadow: 0 10px 20px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05);
+}
+.tm-image-box img { width: 100%; height: 100%; object-fit: cover; }
+
+.sl-ctrls { display: flex; gap: 12px; align-items: center; margin-top: 24px; justify-content: center; }
+.sl-btn { width: 36px; height: 36px; background: var(--card); border: 1px solid var(--line); border-radius: 50%; color: var(--muted); display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; transition: all 0.2s; }
+.sl-btn:hover { border-color: var(--primary); color: var(--primary); }
+.sl-dots { display: flex; gap: 6px; }
+.sl-dot { width: 8px; height: 8px; border-radius: 4px; background: var(--line); transition: width .3s; cursor: pointer; }
+.sl-dot.on { background: var(--primary); width: 24px; }
+
+/* 2 VIDEOS GRID SHOWCASE (VIDEOS SECOND) */
+.video-showcase-container {
+  display: flex; flex-direction: column; align-items: center;
+  padding-top: 40px; border-top: 1px solid var(--line);
+}
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+.video-wrapper { 
+  width: 100%; 
+  border-radius: 16px; overflow: hidden; background: #000; 
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+  border: 1px solid rgba(255,255,255,0.1); 
+  aspect-ratio: 9 / 16; 
+}
+.video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+.rv-video-caption { margin-top: 24px; text-align: center; width: 100%; }
+.rv-video-caption h4 { font-family: var(--font-d); font-size: 26px; font-style: italic; color: var(--primary); text-shadow: 0 2px 10px rgba(240,153,4,0.3); }
+.rv-video-caption p { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
 
 /* ==========================================
-   COMMUNITY 
+   COMMUNITY (MOVED DOWN)
    ========================================== */
 .cm-sec { background: var(--dark); position: relative; overflow: hidden; }
 .cm-sec::before { content: ''; position: absolute; top: 50%; left: -100px; width: 300px; height: 300px; background: rgba(240,153,4,0.05); filter: blur(80px); border-radius: 50%; pointer-events: none; }
@@ -272,65 +313,6 @@ nav.scrolled { background: rgba(6,6,8,.95); backdrop-filter: blur(15px); border-
 .insta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(240,153,4,0.3); }
 
 /* ==========================================
-   REVIEWS (HIGH-IMPACT Transformation Gallery)
-   ========================================== */
-.rv-sec { background: var(--dark2); }
-.rv-hdr { margin-bottom: 40px; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center; }
-
-/* SEPARATED VIDEO SHOWCASE */
-.video-showcase-container {
-  display: flex; flex-direction: column; align-items: center;
-  margin-bottom: 80px; 
-}
-.video-wrapper { 
-  width: 100%; max-width: 400px; 
-  border-radius: 16px; overflow: hidden; background: #000; 
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
-  border: 1px solid rgba(255,255,255,0.1); 
-  aspect-ratio: 9 / 16; 
-}
-.video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
-.rv-video-caption { margin-top: 20px; text-align: center; }
-.rv-video-caption h4 { font-family: var(--font-d); font-size: 26px; font-style: italic; color: var(--primary); text-shadow: 0 2px 10px rgba(240,153,4,0.3); }
-.rv-video-caption p { font-size: 14px; color: var(--muted); margin-top: 8px; }
-
-/* NEW HIGH-IMPACT BEFORE/AFTER CARDS */
-.slide { 
-  background: var(--card); border: 1px solid var(--line); border-radius: 16px; 
-  padding: 0; transition: transform .3s, border-color 0.3s; 
-  height: 100%; display: flex; flex-direction: column; overflow: hidden; 
-}
-.slide:hover { border-color: rgba(240,153,4,0.3); transform: translateY(-4px); }
-
-/* Large Image Transformation Box */
-.tm-image-box {
-  width: 100%; aspect-ratio: 1 / 1.1; background: #000; overflow: hidden; position: relative; border-bottom: 1px solid var(--line);
-}
-.tm-image-box img { width: 100%; height: 100%; object-fit: cover; }
-.tm-image-box::after {
-  content: 'BEFORE | AFTER'; position: absolute; bottom: 8px; left: 8px;
-  background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); color: #fff;
-  font-family: var(--font-ui); font-size: 8px; font-weight: 700; letter-spacing: 1px;
-  padding: 4px 8px; border-radius: 2px; z-index: 2;
-}
-
-/* Content Area below Image */
-.tm-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
-.rv-stars { margin-bottom: 12px; color: var(--primary); font-size: 12px; }
-.rv-text { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.6; font-style: italic; margin-bottom: auto; padding-bottom: 16px; }
-
-.rv-author { display: flex; flex-direction: column; border-top: 1px solid var(--line); padding-top: 16px; }
-.rv-name { font-family: var(--font-ui); font-size: 14px; font-weight: 700; margin-bottom: 2px; color: #fff; }
-.rv-detail { font-size: 11px; color: var(--primary); }
-
-.sl-ctrls { display: flex; gap: 12px; align-items: center; margin-top: 32px; justify-content: center; }
-.sl-btn { width: 36px; height: 36px; background: var(--card); border: 1px solid var(--line); border-radius: 50%; color: var(--muted); display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; transition: all 0.2s; }
-.sl-btn:hover { border-color: var(--primary); color: var(--primary); }
-.sl-dots { display: flex; gap: 6px; }
-.sl-dot { width: 8px; height: 8px; border-radius: 4px; background: var(--line); transition: width .3s; cursor: pointer; }
-.sl-dot.on { background: var(--primary); width: 24px; }
-
-/* ==========================================
    FINAL CTA
    ========================================== */
 .cta-sec { background: var(--dark); padding: 80px 5%; text-align: center; position: relative; overflow: hidden; }
@@ -346,16 +328,44 @@ nav.scrolled { background: rgba(6,6,8,.95); backdrop-filter: blur(15px); border-
    ========================================== */
 footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 50px 5% 30px; }
 .ft-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 40px; text-align: center; }
-.ft-brand-logo { font-family: var(--font-ui); font-size: 24px; font-weight: 800; justify-content: center; display: flex; margin-bottom: 12px; }
-.ft-brand-logo .l2 { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.ft-brand-logo { display: flex; justify-content: center; margin-bottom: 12px; }
+.ft-brand-logo img { height: 50px; width: auto; object-fit: contain; } 
 .ft-soc { display: flex; justify-content: center; gap: 10px; }
-.ft-s { width: 36px; height: 36px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.ft-s { width: 36px; height: 36px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: transform 0.2s, border-color 0.2s; }
+.ft-s:hover { transform: translateY(-3px); border-color: var(--primary); }
 .ft-col-t { font-family: var(--font-ui); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 16px; }
 .ft-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.ft-links a { font-size: 13px; color: var(--muted); }
+.ft-links a { font-size: 13px; color: var(--muted); transition: color 0.2s; cursor: pointer; }
+.ft-links a:hover { color: var(--primary); }
 .ft-bottom { border-top: 1px solid var(--line); padding-top: 24px; text-align: center; display: flex; flex-direction: column; gap: 12px; }
 .ft-copy { font-size: 11px; color: var(--muted); }
 .ft-copy em { font-style: normal; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; }
+
+/* ==========================================
+   CONSENT BANNER (NEW)
+   ========================================== */
+.consent-banner { position: fixed; bottom: -150%; left: 5%; right: 5%; background: rgba(17,17,24,0.95); backdrop-filter: blur(15px); border: 1px solid rgba(240,153,4,0.3); border-radius: 12px; padding: 20px; z-index: 9990; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.6); transition: bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.consent-banner.show { bottom: 24px; }
+.consent-text { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+.consent-text a { color: var(--primary); text-decoration: underline; cursor: pointer; font-weight: 600; }
+.consent-btn { background: var(--grad); color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-family: var(--font-ui); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; align-self: flex-end; }
+
+/* ==========================================
+   MODALS (T&C and PRIVACY)
+   ========================================== */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 100000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 5%; }
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.modal-content { background: var(--dark2); border: 1px solid rgba(240,153,4,0.3); border-radius: 16px; width: 100%; max-width: 800px; max-height: 85vh; overflow-y: auto; padding: 40px 30px; position: relative; transform: translateY(30px) scale(0.95); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+.modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
+.modal-close { position: absolute; top: 15px; right: 15px; background: rgba(240,153,4,0.1); border: 1px solid rgba(240,153,4,0.3); color: var(--primary); width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 10;}
+.modal-close:hover { background: var(--primary); color: #fff; transform: rotate(90deg); }
+.modal-body { margin-top: 10px; }
+.modal-body h2 { font-family: var(--font-d); color: var(--primary); margin-bottom: 24px; font-size: 36px; font-style: italic; text-align: center; border-bottom: 1px solid var(--line); padding-bottom: 16px;}
+.modal-body h3 { font-family: var(--font-ui); color: #fff; margin: 28px 0 12px; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;}
+.modal-body p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 12px; }
+.modal-body ul { margin-left: 20px; margin-bottom: 16px; color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.7;}
+.modal-body li { margin-bottom: 8px; }
+.modal-body strong { color: #fff; }
 
 /* ==========================================
    DESKTOP ENHANCEMENTS (MEDIA QUERIES)
@@ -373,13 +383,14 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
   .inspo-hdr { text-align: left; }
   
   .prog-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .tr-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
   
   .rv-hdr { flex-direction: row; justify-content: space-between; align-items: flex-end; text-align: left; }
   .sl-ctrls { margin-top: 0; }
   
-  #slTrack { display: flex; overflow-x: auto; margin: 0 -6%; padding: 10px 6% 30px; }
-  .slide { flex: 0 0 calc(40% - 10px); } 
+  .video-grid { grid-template-columns: 1fr 1fr; } 
+
+  #slTrack { display: flex; overflow-x: auto; margin: 0 -6%; padding: 10px 6% 30px; gap: 20px;}
+  .slide { flex: 0 0 calc(30% - 14px); } 
   
   .bmi-inner { grid-template-columns: 1fr 1fr; align-items: center; } 
   .bmi-panel { min-height: 280px; }
@@ -396,6 +407,10 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
   .cta-btns { flex-direction: row; max-width: none; justify-content: center; }
   .ft-brand-logo, .ft-soc { justify-content: flex-start; }
   .ft-bottom { flex-direction: row; justify-content: space-between; }
+  
+  /* Desktop Banner alignment */
+  .consent-banner { left: auto; right: 24px; max-width: 400px; flex-direction: row; align-items: center; justify-content: space-between; }
+  .consent-btn { align-self: center; }
 }
 
 @media (min-width: 1024px) {
@@ -407,7 +422,7 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
   .nav-links a { font-family: var(--font-ui); font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; transition: color .2s; position: relative; }
   .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--grad); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
   .nav-links a:hover { color: #fff; } .nav-links a:hover::after { transform: scaleX(1); }
-  .nav-cta { display: inline-block; font-family: var(--font-ui); font-size: 12px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: #fff; background: var(--grad); border: none; padding: 12px 26px; border-radius: 4px; transition: transform .2s; }
+  .nav-cta { display: inline-block; font-family: var(--font-ui); font-size: 12px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: #fff; background: var(--grad); border: none; padding: 12px 26px; border-radius: 4px; transition: transform .2s; cursor: pointer; }
   .nav-cta:hover { transform: translateY(-1px); }
   
   .hero { grid-template-columns: 55% 45%; padding-top: 175px; align-items: center; } 
@@ -425,8 +440,6 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
   .prog-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .pc { border: none; border-bottom: 2px solid transparent; border-radius: 0; }
   .pc:hover { background: var(--card2); border-bottom-color: var(--primary); transform: translateY(-4px); }
-  .tr-grid { grid-template-columns: repeat(4, 1fr); }
-  .tc:hover { transform: translateY(-8px); border-color: rgba(240,153,4,.3); }
   
   .cm-grid { gap: 60px; }
   .insta-card { position: sticky; top: 180px; } 
@@ -434,10 +447,9 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
 
   .ft-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
   
-  #slTrack { margin: 0 -8%; padding: 10px 8% 30px; }
-  .slide { flex: 0 0 calc(30% - 10px); } 
-  .slide:hover { transform: translateY(-4px); border-color: rgba(240,153,4,.3); }
-  .ft-links a:hover { color: #fff; }
+  #slTrack { margin: 0 -8%; padding: 10px 8% 30px; gap: 24px; }
+  .slide { flex: 0 0 calc(25% - 18px); } 
+  .slide:hover { transform: translateY(-4px); }
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -446,6 +458,15 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
 </style>
 </head>
 <body>
+
+<div class="consent-banner" id="consentBanner">
+  <div class="consent-text">
+    We value your privacy. We use cookies to enhance your experience. By using FytBox, you agree to our 
+    <a onclick="openModal('termsModal')">Terms & Conditions</a> and 
+    <a onclick="openModal('privacyModal')">Privacy Policy</a>.
+  </div>
+  <button class="consent-btn" onclick="closeConsent()">I Agree</button>
+</div>
 
 <div class="float-soc">
   <a href="https://wa.me/917838355692?text=Hi%2C%20I%20am%20interested%20in%20joining%20FytBox!" target="_blank" class="float-btn float-wa" aria-label="WhatsApp">
@@ -467,10 +488,9 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
   <button class="mob-close" onclick="toggleMob()">✕</button>
   <ul class="mob-links">
     <li><a href="#programs" onclick="toggleMob()">Classes</a></li>
-    <li><a href="#trainers" onclick="toggleMob()">Trainers</a></li>
-    <li><a href="#community" onclick="toggleMob()">Community</a></li>
     <li><a href="#bmi" onclick="toggleMob()">BMI</a></li>
     <li><a href="#reviews" onclick="toggleMob()">Reviews</a></li>
+    <li><a href="#community" onclick="toggleMob()">Community</a></li>
     <li><a href="https://wa.me/917838355692?text=Hi%2C%20I%20am%20interested%20in%20joining%20FytBox!" target="_blank" onclick="toggleMob()">Join Now</a></li>
   </ul>
 </div>
@@ -481,12 +501,11 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
   </a>
   <ul class="nav-links">
     <li><a href="#programs">Classes</a></li>
-    <li><a href="#trainers">Trainers</a></li>
-    <li><a href="#community">Community</a></li>
     <li><a href="#bmi">BMI Check</a></li>
     <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#community">Community</a></li>
   </ul>
-  <a class="nav-cta" href="https://wa.me/917838355692?text=Hi%2C%20I%20am%20interested%20in%20joining%20FytBox!" target="_blank">Join Now</a>
+  <button class="nav-cta" onclick="window.open('https://wa.me/917838355692?text=Hi%2C%20I%20am%20interested%20in%20joining%20FytBox!', '_blank')">Join Now</button>
   <button class="ham" aria-label="Menu" onclick="toggleMob()"><span></span><span></span><span></span></button>
 </nav>
 
@@ -607,18 +626,66 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
   </div>
 </section>
 
-<section class="sec tr-sec" id="trainers">
-  <div class="tr-hdr rv">
-    <div class="stag">Expert Team</div>
-    <h2 class="sh2">Meet Your <em>Trainers</em></h2>
-    <p class="ssub">Certified experts who'll push you, guide you, and celebrate your every win.</p>
+<section class="sec rv-sec" id="reviews">
+  
+  <div class="rv-hdr rv">
+    <div>
+      <div class="stag">Real Stories</div>
+      <h2 class="sh2" style="margin-bottom:0">What Women<br><em>Are Saying</em></h2>
+    </div>
   </div>
-  <div class="tr-grid scroll-track-mob">
-    <div class="tc scroll-card-mob rv"><div class="tc-photo"><div class="tc-init">PS</div><div class="tc-spec">Zumba Specialist</div></div><div class="tc-info"><div class="tc-name">Priya Sharma</div><div class="tc-meta">8 yrs exp<span class="tc-dot"></span>Delhi</div></div></div>
-    <div class="tc scroll-card-mob rv"><div class="tc-photo"><div class="tc-init">RK</div><div class="tc-spec">HIIT & Dance</div></div><div class="tc-info"><div class="tc-name">Riya Kapoor</div><div class="tc-meta">5 yrs exp<span class="tc-dot"></span>Mumbai</div></div></div>
-    <div class="tc scroll-card-mob rv"><div class="tc-photo"><div class="tc-init">AN</div><div class="tc-spec">PCOS Expert</div></div><div class="tc-info"><div class="tc-name">Anjali Nair</div><div class="tc-meta">6 yrs exp<span class="tc-dot"></span>Bangalore</div></div></div>
-    <div class="tc scroll-card-mob rv"><div class="tc-photo"><div class="tc-init">SM</div><div class="tc-spec">Post-Pregnancy</div></div><div class="tc-info"><div class="tc-name">Sneha Mehta</div><div class="tc-meta">4 yrs exp<span class="tc-dot"></span>Pune</div></div></div>
+  
+  <div class="gallery-slider rv" style="transition-delay: 0.1s; margin-bottom: 60px;">
+    <div class="scroll-track-mob" id="slTrack">
+      
+      <div class="slide scroll-card-mob">
+        <div class="tm-image-box">
+          <img src="test1.webp" alt="Transformation Result 1">
+        </div>
+      </div>
+      
+      <div class="slide scroll-card-mob">
+        <div class="tm-image-box">
+          <img src="test2.webp" alt="Transformation Result 2">
+        </div>
+      </div>
+      
+      <div class="slide scroll-card-mob">
+        <div class="tm-image-box">
+          <img src="test3.webp" alt="Transformation Result 3">
+        </div>
+      </div>
+      
+      <div class="slide scroll-card-mob">
+        <div class="tm-image-box">
+          <img src="test4.webp" alt="Transformation Result 4">
+        </div>
+      </div>
+      
+    </div>
+    
+    <div class="sl-ctrls">
+      <button class="sl-btn" aria-label="Previous" onclick="slide(-1)">&#8592;</button>
+      <div class="sl-dots" id="slDots"></div>
+      <button class="sl-btn" aria-label="Next" onclick="slide(1)">&#8594;</button>
+    </div>
   </div>
+
+  <div class="video-showcase-container rv" style="border-top: 1px solid var(--line); padding-top: 60px;">
+    <div class="video-grid">
+      <div class="video-wrapper">
+        <video src="vid1.mp4" controls playsinline preload="metadata"></video>
+      </div>
+      <div class="video-wrapper">
+        <video src="vid2.mp4" controls playsinline preload="metadata"></video>
+      </div>
+    </div>
+    <div class="rv-video-caption">
+      <h4>"Real Results. Real Sisterhood."</h4>
+      <p>Watch Our Community's Journey</p>
+    </div>
+  </div>
+  
 </section>
 
 <section class="sec cm-sec" id="community">
@@ -660,95 +727,6 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
   </div>
 </section>
 
-<section class="sec rv-sec" id="reviews">
-  
-  <div class="rv-hdr rv">
-    <div>
-      <div class="stag">Real Stories</div>
-      <h2 class="sh2" style="margin-bottom:0">What Women<br><em>Are Saying</em></h2>
-    </div>
-  </div>
-  
-  <div class="video-showcase-container rv">
-    <div class="video-wrapper">
-      <video src="video.MP4" controls playsinline preload="metadata" poster="test1.webp"></video>
-    </div>
-    <div class="rv-video-caption">
-      <h4>"Real Results. Real Sisterhood."</h4>
-      <p>Watch Our Community's Journey</p>
-    </div>
-  </div>
-
-  <div class="gallery-slider rv" style="transition-delay: 0.1s;">
-    <div class="scroll-track-mob" id="slTrack">
-      
-      <div class="slide scroll-card-mob">
-        <div class="tm-image-box">
-          <img src="test1.webp" alt="Transformation Result 1">
-        </div>
-        <div class="tm-content">
-          <div class="rv-stars">★★★★★</div>
-          <p class="rv-text">"Lost 6kg in 6 weeks and I was genuinely having fun the entire time. The trainers make you feel like you're at a party."</p>
-          <div class="rv-author">
-            <div class="rv-name">Sunita Rawat</div>
-            <div class="rv-detail">Delhi · Zumba Program</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="slide scroll-card-mob">
-        <div class="tm-image-box">
-          <img src="test2.webp" alt="Transformation Result 2">
-        </div>
-        <div class="tm-content">
-          <div class="rv-stars">★★★★★</div>
-          <p class="rv-text">"As a busy working mom, FytBox is the only fitness platform I've actually stuck with. Sneha ma'am is incredible and motivating."</p>
-          <div class="rv-author">
-            <div class="rv-name">Meera Kulkarni</div>
-            <div class="rv-detail">Mumbai · Post-Pregnancy</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="slide scroll-card-mob">
-        <div class="tm-image-box">
-          <img src="test3.webp" alt="Transformation Result 3">
-        </div>
-        <div class="tm-content">
-          <div class="rv-stars">★★★★★</div>
-          <p class="rv-text">"PCOS made weight loss feel impossible. FytBox specialized sessions changed everything. Highly recommend."</p>
-          <div class="rv-author">
-            <div class="rv-name">Anjali Patel</div>
-            <div class="rv-detail">Bangalore · PCOS Fitness</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="slide scroll-card-mob">
-        <div class="tm-image-box">
-          <img src="test4.webp" alt="Transformation Result 4">
-        </div>
-        <div class="tm-content">
-          <div class="rv-stars">★★★★★</div>
-          <p class="rv-text">"Post-delivery I struggled to feel like myself. FytBox helped me feel stronger, happier, and more confident."</p>
-          <div class="rv-author">
-            <div class="rv-name">Ritika Sharma</div>
-            <div class="rv-detail">Hyderabad · HIIT Dance</div>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-    
-    <div class="sl-ctrls">
-      <button class="sl-btn" aria-label="Previous" onclick="slide(-1)">&#8592;</button>
-      <div class="sl-dots" id="slDots"></div>
-      <button class="sl-btn" aria-label="Next" onclick="slide(1)">&#8594;</button>
-    </div>
-  </div>
-  
-</section>
-
 <section class="cta-sec" id="join">
   <div class="eyebrow rv" style="justify-content:center;margin-bottom:16px"><span class="live-dot"></span>Join 500+ Women</div>
   <h2 class="cta-h2 rv">Ready to <em>Dance</em><br>Your Way Fit?</h2>
@@ -763,11 +741,17 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
 <footer>
   <div class="ft-grid">
     <div>
-      <div class="ft-brand-logo"><span style="color:#fff">Fyt</span><span class="l2">Box</span></div>
+      <div class="ft-brand-logo">
+        <img src="logo.png" alt="FytBox Logo" style="height: 50px; width: auto; object-fit: contain;">
+      </div>
       <p class="ft-desc">India's most energetic online Zumba platform for women. Dance, sweat, and transform from wherever you are in the world.</p>
       <div class="ft-soc">
-        <a class="ft-s" href="https://instagram.com/fytboxonline" target="_blank">📸</a>
-        <a class="ft-s" href="https://wa.me/917838355692" target="_blank">💬</a>
+        <a class="ft-s" href="https://instagram.com/fytboxonline" target="_blank" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a class="ft-s" href="https://wa.me/917838355692" target="_blank" aria-label="WhatsApp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </a>
       </div>
     </div>
     <div>
@@ -776,11 +760,19 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
     </div>
     <div>
       <div class="ft-col-t">Company</div>
-      <ul class="ft-links"><li><a href="https://instagram.com/fytboxonline" target="_blank">@fytboxonline</a></li><li><a href="#trainers">Trainers</a></li><li><a href="#community">Community</a></li><li><a href="#blog">Blog</a></li></ul>
+      <ul class="ft-links">
+        <li><a href="https://instagram.com/fytboxonline" target="_blank">@fytboxonline</a></li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#blog">Blog</a></li>
+      </ul>
     </div>
     <div>
       <div class="ft-col-t">Support</div>
-      <ul class="ft-links"><li><a href="https://wa.me/917838355692" target="_blank">+91 78383 55692</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms & Conditions</a></li></ul>
+      <ul class="ft-links">
+        <li><a href="https://wa.me/917838355692" target="_blank">+91 78383 55692</a></li>
+        <li><a href="#" onclick="openModal('privacyModal'); return false;">Privacy Policy</a></li>
+        <li><a href="#" onclick="openModal('termsModal'); return false;">Terms & Conditions</a></li>
+      </ul>
     </div>
   </div>
   <div class="ft-bottom">
@@ -788,7 +780,132 @@ footer { background: var(--dark2); border-top: 1px solid var(--line); padding: 5
   </div>
 </footer>
 
+<div class="modal-overlay" id="termsModal" onclick="closeModalOutside(event, 'termsModal')">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('termsModal')">✕</button>
+    <div class="modal-body">
+      <h2>Terms & Conditions</h2>
+      
+      <h3>1. Acceptance of Terms</h3>
+      <p>By accessing or using the website and services of Fyt Box, you agree to be bound by these Terms & Conditions. If you do not agree, please do not use our services.</p>
+
+      <h3>2. Eligibility</h3>
+      <p>You must be at least 18 years of age to purchase or use Fyt Box services. By using our platform, you confirm that you meet this requirement. Users under 18 must have parental or guardian consent.</p>
+
+      <h3>3. Membership & Subscriptions</h3>
+      <ul>
+        <li>Fyt Box offers monthly and annual membership plans.</li>
+        <li>You may cancel your membership at any time by contacting us at Fytboxindia@gmail.com or calling +91 7838355692.</li>
+        <li>Cancellations take effect at the end of the current billing cycle — no partial refunds will be issued for unused periods.</li>
+        <li>Fyt Box reserves the right to modify membership pricing with reasonable prior notice.</li>
+      </ul>
+
+      <h3>4. Payments & Refunds</h3>
+      <p><strong>Payments:</strong> All transactions are processed securely through trusted third-party payment gateways. By purchasing a membership, you authorize Fyt Box to charge your selected payment method on a recurring basis. We accept UPI, debit/credit cards, and net banking.</p>
+      <p><strong>Refund Policy:</strong></p>
+      <ul>
+        <li>Membership fees are non-refundable once the billing cycle has begun.</li>
+        <li>Refunds may be considered on a case-by-case basis at Fyt Box's sole discretion in exceptional circumstances.</li>
+        <li>All digital content, online sessions, and fitness plans are non-refundable once accessed or delivered.</li>
+      </ul>
+
+      <h3>5. Health & Fitness Disclaimer ⚠️</h3>
+      <p><strong>Important:</strong> All fitness content, workout plans, nutritional guidance, and information provided by Fyt Box are for general informational and educational purposes only and do not constitute medical advice.</p>
+      <ul>
+        <li>Always consult a qualified healthcare professional before beginning any new fitness or nutrition program.</li>
+        <li>Fyt Box is not liable for any injuries, adverse health effects, or damages arising from the use of our content or services.</li>
+        <li>Individual results may vary and are not guaranteed.</li>
+      </ul>
+
+      <h3>6. Intellectual Property</h3>
+      <p>All content on the Fyt Box platform — including logos, workout plans, videos, blog posts, graphics, and branding — is the exclusive property of Fyt Box and is protected under applicable Indian copyright and trademark laws. You may not:</p>
+      <ul>
+        <li>Copy, reproduce, or redistribute Fyt Box content without written permission.</li>
+        <li>Use the Fyt Box name or logo for any commercial purpose.</li>
+        <li>Scrape, reverse-engineer, or otherwise misuse our platform.</li>
+      </ul>
+
+      <h3>7. Prohibited Activities</h3>
+      <p>By using our services, you agree not to: use Fyt Box for any unlawful or unauthorized purpose; attempt to gain unauthorized access to our systems or data; impersonate another person or entity; share your membership access with others; or post false, harmful, or defamatory content about Fyt Box.</p>
+
+      <h3>8. Limitation of Liability</h3>
+      <p>To the fullest extent permitted under Indian law, Fyt Box shall not be liable for: any indirect, incidental, or consequential damages; loss of data or business opportunities; physical injury or health issues resulting from use of our fitness content or services; or interruption, errors, or downtime of our website or services. Our total liability in any case shall not exceed the amount paid by you in the last 3 months for Fyt Box services.</p>
+
+      <h3>9. Modifications to Services</h3>
+      <p>Fyt Box reserves the right to modify, suspend, or discontinue any part of our services at any time, update these Terms & Conditions with reasonable prior notice, or change membership pricing or features with prior communication. Continued use constitutes acceptance.</p>
+
+      <h3>10. Governing Law & Dispute Resolution</h3>
+      <p>These Terms & Conditions are governed by the laws of the Republic of India. Any disputes shall first be attempted to be resolved through good-faith negotiation. If unresolved within 30 days, disputes shall be subject to the exclusive jurisdiction of the courts of India.</p>
+
+      <h3>11. Contact Us</h3>
+      <p>📧 Email: Fytboxindia@gmail.com<br>📞 Phone: +91 7838355692<br>📍 Governed under the laws of India</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="privacyModal" onclick="closeModalOutside(event, 'privacyModal')">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('privacyModal')">✕</button>
+    <div class="modal-body">
+      <h2>Privacy Policy</h2>
+      
+      <h3>1. Introduction</h3>
+      <p>Welcome to Fyt Box. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, use our services, or purchase a membership with us. By accessing or using our platform, you agree to the terms of this Privacy Policy.</p>
+
+      <h3>2. Information We Collect</h3>
+      <ul>
+        <li><strong>Personal Information:</strong> Full name, email address, phone number, billing/shipping address, and date of birth (where applicable).</li>
+        <li><strong>Health & Fitness Data:</strong> Fitness goals, workout preferences, and body metrics such as height, weight, and fitness level.</li>
+        <li><strong>Payment Information:</strong> Processed securely through trusted third parties. Fyt Box does not store full card details.</li>
+        <li><strong>Technical & Usage Data:</strong> IP address, browser type, device information, and interaction data.</li>
+      </ul>
+
+      <h3>3. How We Use Your Information</h3>
+      <p>We use your information to process payments, manage membership, personalize your fitness experience, send updates and promotional communications, respond to queries, improve our website, ensure platform security, and comply with legal obligations.</p>
+
+      <h3>4. Health Data — Special Notice</h3>
+      <p>Any health and fitness data you provide is treated with the highest level of care. Fyt Box does not sell your health data to any third party. It is used solely to enhance your experience. Third-party fitness app connections are governed by their respective privacy policies.</p>
+
+      <h3>5. Sharing Your Information</h3>
+      <p>Fyt Box does not sell your personal data. We share information only with Service Providers (payment processors, analytics), for Legal Compliance, during a Business Transfer, or with your explicit Consent.</p>
+
+      <h3>6. Cookies & Tracking</h3>
+      <p>We use Essential, Analytics (e.g., Google Analytics), and Marketing cookies to improve your experience. You may control cookie preferences through your browser settings at any time.</p>
+
+      <h3>7. Data Security</h3>
+      <p>We implement industry-standard security measures including SSL encryption, secure servers, and restricted access controls. While we take reasonable precautions, no internet transmission is 100% secure.</p>
+
+      <h3>8. Data Retention</h3>
+      <p>We retain your personal data for as long as your membership is active or as needed to provide services, fulfill legal obligations, or resolve disputes. You may request deletion of your data at any time.</p>
+
+      <h3>9. Your Rights</h3>
+      <p>You have the right to access, correct, or delete your personal data, opt out of marketing communications, request data portability, and withdraw consent. To exercise these rights, contact us at fytboxindia@gmail.com.</p>
+
+      <h3>10. Children's Privacy</h3>
+      <p>Fyt Box services are not directed to individuals under the age of 18. We do not knowingly collect personal data from minors.</p>
+
+      <h3>11. Third-Party Links</h3>
+      <p>Our website may contain links to third-party websites. Fyt Box is not responsible for their privacy practices.</p>
+
+      <h3>12. Changes to This Policy</h3>
+      <p>We reserve the right to update this Privacy Policy at any time. Changes will be posted with an updated "Last Updated" date.</p>
+
+      <h3>13. Contact Us</h3>
+      <p>📧 Email: fytboxindia@gmail.com<br>📞 Phone: +91 7838355692</p>
+    </div>
+  </div>
+</div>
+
 <script>
+/* CONSENT BANNER LOGIC (Shows shortly after splash screen) */
+setTimeout(() => {
+  document.getElementById('consentBanner').classList.add('show');
+}, 4500); 
+
+function closeConsent() {
+  document.getElementById('consentBanner').classList.remove('show');
+}
+
 /* SPLASH REMOVAL */
 setTimeout(() => {
   const splash = document.getElementById('splash');
@@ -873,6 +990,21 @@ function slide(dir) {
 
 window.addEventListener('resize', buildDots);
 window.addEventListener('DOMContentLoaded', buildDots);
+
+/* MODALS LOGIC */
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow = 'hidden'; 
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = 'auto'; 
+}
+function closeModalOutside(event, id) {
+  if (event.target === document.getElementById(id)) {
+    closeModal(id);
+  }
+}
 </script>
 </body>
 </html>
